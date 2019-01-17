@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>订单支付</title>
+		<link href="./css/pay.css" rel="stylesheet" type="text/css">
+	</head>
+
+	<body>
+		<div class="page__bd">
+			<div class="pay-form-preview">
+				<div class="pay-form-preview__hd">
+					<div class="pay-form-preview__item">
+						<label class="pay-form-preview__label">付款金额</label>
+						<em class="pay-form-preview__value">{tradeAmount}</em></div>
+				</div>
+				<div class="pay-form-preview__bd">
+					<div class="pay-form-preview__item">
+						<label class="pay-form-preview__label">商品</label>
+						<span class="pay-form-preview__value">{tradeSubject}</span></div>
+					<div class="pay-form-preview__item">
+						<label class="pay-form-preview__label">相关描述</label>
+						<span class="pay-form-preview__value">{tradeBody}</span></div>
+				</div>
+				<div class="pay-form-preview__ft">
+					<a class="pay-form-preview__btn pay-form-preview__btn_primary" href="{tradeUrl}">立刻支付</a>
+				</div>
+			</div>
+		</div>
+	</body>
+
+</html>

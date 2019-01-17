@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	id="WebApp_ID" version="3.0">
+	<display-name>api</display-name>
+	<!-- <security-constraint> <web-resource-collection> <web-resource-name>SSL</web-resource-name> 
+		<url-pattern>/*</url-pattern> </web-resource-collection> <user-data-constraint> 
+		<transport-guarantee>CONFIDENTIAL</transport-guarantee> </user-data-constraint> 
+		</security-constraint> -->
+	<filter>
+		<filter-name>EncodingFilter</filter-name>
+		<filter-class>com.api.filter.EncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>EncodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<filter>
+		<filter-name>SecurityFilter</filter-name>
+		<filter-class>com.api.filter.SecurityFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>SecurityFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<filter>
+		<filter-name>AdminFilter</filter-name>
+		<filter-class>com.api.filter.AdminFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>AdminFilter</filter-name>
+		<url-pattern>/admin/*</url-pattern>
+		<url-pattern>*.admin</url-pattern>
+	</filter-mapping>
+	<filter>
+		<filter-name>AnnotationFilter</filter-name>
+		<filter-class>com.api.filter.AnnotationHandleFilter</filter-class>
+		<init-param>
+			<param-name>servletPackage</param-name>
+			<param-value>com.api.servlet.test,com.api.servlet</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>AnnotationFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<listener>
+		<listener-class>com.api.init.StartInit</listener-class>
+	</listener>
+	<welcome-file-list>
+		<welcome-file>Pay.html</welcome-file>
+		<welcome-file>index.html</welcome-file>
+	</welcome-file-list>
+</web-app>

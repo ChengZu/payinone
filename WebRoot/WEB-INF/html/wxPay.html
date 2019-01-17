@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>订单支付</title>
+		<link href="./css/pay.css" rel="stylesheet" type="text/css">
+	</head>
+
+	<body>
+		<div class="page__bd">
+			<div class="pay-form-preview">
+				<div class="pay-form-preview__hd">
+					<div class="pay-form-preview__item">
+						<label class="pay-form-preview__label">付款金额</label>
+						<em class="pay-form-preview__value">{tradeAmount}</em></div>
+				</div>
+				<div class="pay-form-preview__bd">
+					<div class="pay-form-preview__item">
+						<label class="pay-form-preview__label">商品</label>
+						<span class="pay-form-preview__value">{tradeSubject}</span></div>
+					<div class="pay-form-preview__item">
+						<label class="pay-form-preview__label">相关描述</label>
+						<span class="pay-form-preview__value">{tradeBody}</span></div>
+				</div>
+				<div class="pay-form-preview__ft">
+					<a class="pay-form-preview__btn pay-form-preview__btn_primary" href="javascript:onBridgeReady()">立刻支付</a>
+				</div>
+			</div>
+		</div>
+
+		<script type="text/javascript">
+			function onBridgeReady() {
+				WeixinJSBridge.invoke(
+					'getBrandWCPayRequest', {
+						"appId": "{appId}",
+						"timeStamp": "{timeStamp}",
+						"nonceStr": "{nonceStr}",
+						"package": "{package}",
+						"signType": "MD5",
+						"paySign": "{paySign}"
+					},
+					function(res) {
+						if(res.err_msg == "get_brand_wcpay_request:ok") {
+							//var el = document.getElementsByClassName('pay-form-preview__ft');
+							//el[0].innerHTML='<a class="pay-form-preview__btn pay-form-preview__btn_primary" href="javascript:onBridgeReady()">已支付</a>';
+							WeixinJSBridge.call('closeWindow');
+						}
+					}
+				);
+			}
+
+			if(typeof WeixinJSBridge == "undefined") {
+
+				if(documentaddEventListener) {
+
+					documentaddEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+				} else if(documentattachEvent) {
+
+					documentattachEvent('WeixinJSBridgeReady', onBridgeReady);
+					documentattachEvent('onWeixinJSBridgeReady', onBridgeReady);
+				}
+			} else {
+				onBridgeReady();
+			}
+		</script>
+	</body>
+
+</html>
